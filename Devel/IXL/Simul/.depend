@@ -1,0 +1,15 @@
+simul_t.cmo :
+simul_t.cmx :
+utils_simul.cmo : simul_t.cmo
+utils_simul.cmx : simul_t.cmx
+simulation.cmo : simul_t.cmo
+simulation.cmx : simul_t.cmx
+main.cmo : utils_simul.cmo simulation.cmo simul_t.cmo parser_simul.cmi \
+    lexer_simul.cmo
+main.cmx : utils_simul.cmx simulation.cmx simul_t.cmx parser_simul.cmx \
+    lexer_simul.cmx
+parser_simul.cmo : simul_t.cmo parser_simul.cmi
+parser_simul.cmx : simul_t.cmx parser_simul.cmi
+lexer_simul.cmo : simul_t.cmo parser_simul.cmi
+lexer_simul.cmx : simul_t.cmx parser_simul.cmx
+parser_simul.cmi : simul_t.cmo

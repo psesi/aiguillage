@@ -1,0 +1,82 @@
+This is BibTeX, Version 0.99d (TeX Live 2016/dev)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: biblio.aux
+The style file: plain.bst
+Database file #1: biblio.bib
+I was expecting a `,' or a `}'---line 42 of file biblio.bib
+ :         
+ :         month = {November},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--to sort, need author or key in DCC
+Warning--to sort, need author or key in Jouef
+Warning--to sort, need author or key in Xilink
+Too many commas in name 1 of "Xavier Leroy,Damien Doligez, Alain Frisch, Jacques Garrigue, Didier R´emy and J´erˆome Vouillon" for entry OCAML
+while executing---line 1049 of file plain.bst
+Too many commas in name 1 of "Xavier Leroy,Damien Doligez, Alain Frisch, Jacques Garrigue, Didier R´emy and J´erˆome Vouillon" for entry OCAML
+while executing---line 1049 of file plain.bst
+Warning--empty author in Jouef
+Warning--empty journal in Jouef
+Warning--empty year in Jouef
+Warning--empty author in Xilink
+Warning--empty journal in Xilink
+Warning--empty year in Xilink
+Warning--empty author in DCC
+Warning--empty journal in DCC
+Warning--empty year in DCC
+Warning--empty journal in FPGA1
+Warning--empty journal in rapport
+Warning--empty year in rapport
+Warning--empty journal in IXL
+Warning--empty year in IXL
+Warning--empty journal in siteferro
+Warning--empty year in siteferro
+Too many commas in name 1 of "Xavier Leroy,Damien Doligez, Alain Frisch, Jacques Garrigue, Didier R´emy and J´erˆome Vouillon" for entry OCAML
+while executing---line 1090 of file plain.bst
+Too many commas in name 1 of "Xavier Leroy,Damien Doligez, Alain Frisch, Jacques Garrigue, Didier R´emy and J´erˆome Vouillon" for entry OCAML
+while executing---line 1090 of file plain.bst
+Warning--empty publisher in OCAML
+Warning--empty year in OCAML
+Warning--empty publisher in VHDL
+You've used 9 entries,
+            2118 wiz_defined-function locations,
+            528 strings with 4598 characters,
+and the built_in function-call counts, 1763 in all, are:
+= -- 146
+> -- 51
+< -- 0
++ -- 24
+- -- 14
+* -- 112
+:= -- 290
+add.period$ -- 17
+call.type$ -- 9
+change.case$ -- 32
+chr.to.int$ -- 0
+cite$ -- 31
+duplicate$ -- 94
+empty$ -- 167
+format.name$ -- 14
+if$ -- 349
+int.to.chr$ -- 0
+int.to.str$ -- 9
+missing$ -- 11
+newline$ -- 38
+num.names$ -- 12
+pop$ -- 75
+preamble$ -- 1
+purify$ -- 25
+quote$ -- 0
+skip$ -- 55
+stack$ -- 0
+substring$ -- 46
+swap$ -- 2
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 32
+warning$ -- 22
+while$ -- 12
+width$ -- 10
+write$ -- 63
+(There were 5 error messages)

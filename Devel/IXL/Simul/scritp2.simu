@@ -1,0 +1,188 @@
+
+Cycle 1 : --reset the circuit
+Events
+
+  SE_ID_1;  
+  SE_ID_2;  
+  SE_ID_3;  
+  SE_ID_4;  
+  SE_ID_5;  
+  SE_ID_6;  
+  SE_ID_7;  
+  SE_ID_8;  
+  SE_ID_9;  
+  SE_ID_10;  
+  SE_ID_11;  
+  SE_ID_12;  
+  SE_ID_13;  
+  SE_ID_14;  
+  SE_ID_15;  
+  SE_ID_16;  
+  SE_ID_17;  
+  SE_ID_18;  
+  SE_ID_19;  
+  SE_ID_20;  
+
+
+  SW_CMD_NO_1;
+  SW_CMD_NO_2;
+  SW_CMD_NO_3;
+  SW_CMD_NO_4;
+  SW_CMD_NO_5;
+  SW_CMD_NO_6;
+  SW_CMD_NO_7;
+  SW_CMD_NO_8;
+
+  SW_ST_LE_1;
+  SW_ST_LE_2;
+  SW_ST_LE_3;
+  SW_ST_LE_4;
+  SW_ST_LE_5;
+  SW_ST_LE_6;
+  SW_ST_LE_7;
+  SW_ST_LE_8;
+
+
+Outputs
+
+  TC_01 = Free;  
+  TC_02 = Free;  
+  TC_03 = Free;  
+  TC_04 = Free;  
+  TC_05 = Free;  
+  TC_06 = Free;  
+  TC_07 = Free;  
+  TC_08 = Free;  
+  TC_09 = Free;  
+  TC_10 = Free;  
+  TC_11 = Free;  
+  TC_12 = Free;  
+  TC_13 = Free;  
+  TC_14 = Free;  
+  TC_15 = Free;
+  TC_16 = Free;	
+
+
+
+  SW_AUT_LE_1 = NoAut;
+  SW_AUT_LE_2 = NoAut;
+  SW_AUT_LE_3 = NoAut;
+  SW_AUT_LE_4 = NoAut;
+  SW_AUT_LE_5 = NoAut;
+  SW_AUT_LE_6 = NoAut;
+  SW_AUT_LE_7 = NoAut;
+  SW_AUT_LE_8 = NoAut;  
+
+  SW_AUT_RI_1 = NoAut;
+  SW_AUT_RI_2 = NoAut;
+  SW_AUT_RI_3 = NoAut;
+  SW_AUT_RI_4 = NoAut;
+  SW_AUT_RI_5 = NoAut;
+  SW_AUT_RI_6 = NoAut;
+  SW_AUT_RI_7 = NoAut;
+  SW_AUT_RI_8 = NoAut;  
+
+
+
+Cycle 2 : -- make 2 complete turn on the first track
+Events
+  SE_UP_1;  
+Outputs
+  TC_01 = Occ; -- enter into TC1 
+
+Cycle 3 :
+Events
+  SE_ID_1;  
+  SE_UP_2;  -- enter into TC2	
+Outputs
+  TC_01 = Free; -- TC1 libre
+  TC_02 = Occ;  -- TC2 Occupé
+
+Cycle 4 :
+Events
+  SE_ID_2;  
+  SE_UP_3;  -- enter into TC3	
+Outputs
+  TC_02 = Free; --
+  TC_03 = Occ;  --
+
+Cycle 5 :
+Events
+  SE_ID_3;  
+  SE_UP_4;  -- enter into TC4	
+Outputs
+  TC_03 = Free; --
+  TC_04 = Occ;  --
+
+Cycle 6 :
+Events
+  SE_ID_4;  
+  SE_UP_5;  -- enter into TC5	
+Outputs
+  TC_04 = Free; --
+  TC_05 = Occ;  -- 
+
+Cycle 7 :
+Events
+  SE_ID_5;  
+  SE_UP_6;  -- enter into TC6	
+Outputs
+  TC_05 = Free; --
+  TC_06 = Occ;  --
+
+Cycle 8 : -- first turn complete
+Events
+  SE_ID_6;  
+  SE_UP_1;  -- enter into TC1	
+Outputs
+  TC_06 = Free; --
+  TC_01 = Occ;  --
+
+Cycle 9 :
+Events
+  SE_ID_1;  
+  SE_UP_2;  -- enter into TC2	
+Outputs
+  TC_01 = Free; --
+  TC_02 = Occ;  --
+
+Cycle 10 :
+Events
+  SE_ID_2;  
+  SE_UP_3;  -- enter into TC3	
+Outputs
+  TC_02 = Free; --
+  TC_03 = Occ;  --
+
+Cycle 11 :
+Events
+  SE_ID_3;  
+  SE_UP_4;  -- enter into TC4	
+Outputs
+  TC_03 = Free; --
+  TC_04 = Occ;  --
+
+Cycle 12 :
+Events
+  SE_ID_4;  
+  SE_UP_5;  -- enter into TC5	
+Outputs
+  TC_04 = Free; --
+  TC_05 = Occ;  --
+
+Cycle 13 :
+Events
+  SE_ID_5;  
+  SE_UP_6;  -- enter into TC6	
+Outputs
+  TC_05 = Free; --
+  TC_06 = Occ;  --
+
+Cycle 14 : -- second turn complete
+Events
+  SE_ID_6;  
+  SE_UP_1;  -- enter into TC1	
+Outputs
+  TC_06 = Free; --
+  TC_01 = Occ;  --
+

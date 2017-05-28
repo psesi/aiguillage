@@ -1,0 +1,13 @@
+ixl_t.cmo :
+ixl_t.cmx :
+utils_IXL.cmo : ixl_t.cmo
+utils_IXL.cmx : ixl_t.cmx
+logic.cmo : ixl_t.cmo
+logic.cmx : ixl_t.cmx
+main.cmo : utils_IXL.cmo parser_IXL.cmi logic.cmo lexer_IXL.cmo ixl_t.cmo
+main.cmx : utils_IXL.cmx parser_IXL.cmx logic.cmx lexer_IXL.cmx ixl_t.cmx
+parser_IXL.cmo : ixl_t.cmo parser_IXL.cmi
+parser_IXL.cmx : ixl_t.cmx parser_IXL.cmi
+lexer_IXL.cmo : parser_IXL.cmi ixl_t.cmo
+lexer_IXL.cmx : parser_IXL.cmx ixl_t.cmx
+parser_IXL.cmi : ixl_t.cmo

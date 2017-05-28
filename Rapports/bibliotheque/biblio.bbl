@@ -1,0 +1,41 @@
+\begin{thebibliography}{1}
+
+\bibitem{Jouef}
+Datasheet locomotive “jouef” cc 72000.
+
+\bibitem{Xilink}
+Datasheet xilink.
+
+\bibitem{DCC}
+Dcc - digital command control for model train sets.
+
+\bibitem{FPGA1}
+B.GRANADO et~J.DENOULET.
+\newblock Cours fpga1.
+\newblock 2016.
+
+\bibitem{rapport}
+M.Ayrault.
+\newblock Rapport de projet fpga.
+
+\bibitem{IXL}
+railwaysignalling.eu.
+\newblock
+  \url{http://www.railwaysignalling.eu/railway-interlocking-principles-railwaysignalling}.
+
+\bibitem{siteferro}
+D.~Roverch.
+\newblock \url{http://roverch.net/modelisme/Signalisation.html}.
+
+\bibitem{OCAML}
+Alain Frisch Jacques Garrigue Didier~R´emy Xavier~Leroy, Damien~Doligez and
+  J´erˆome Vouillon.
+\newblock {\em The OCaml system - Release 4.04 - Documentation and user’s
+  manual}.
+
+\bibitem{VHDL}
+xxx.
+\newblock {\em VHDL Reference Manual}.
+\newblock 2016.
+
+\end{thebibliography}

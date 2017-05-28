@@ -1,0 +1,245 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% University Assignment Title Page 
+% LaTeX Template
+% Version 1.0 (27/12/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% WikiBooks (http://en.wikibooks.org/wiki/LaTeX/Title_Creation)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+% 
+% Instructions for using this template:
+% This title page is capable of being compiled as is. This is not useful for 
+% including it in another document. To do this, you have two options: 
+%
+% 1) Copy/paste everything between \begin{document} and \end{document} 
+% starting at \begin{titlepage} and paste this into another LaTeX file where you 
+% want your title page.
+% OR
+% 2) Remove everything outside the \begin{titlepage} and \end{titlepage} and 
+% move this file to the same directory as the LaTeX file you wish to add it to. 
+% Then add \input{./title_page_1.tex} to your LaTeX file where you want your
+% title page.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\title{Title page with logo}
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[12pt]{article}
+
+\usepackage[francais]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{color}
+
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{enumerate}
+\usepackage{url}
+\usepackage{listings}
+
+\usepackage{xcolor}
+\colorlet{keyword}{blue!100!black!80}
+\colorlet{comment}{green!90!black!90}
+\lstdefinestyle{vhdl}{
+   language     = VHDL,
+   basicstyle   = \ttfamily,
+   keywordstyle = \color{keyword}\bfseries,
+   commentstyle = \color{comment}
+}
+
+\lstdefinestyle{equ}{
+   basicstyle   = \ttfamily,
+   keywordstyle = \color{keyword}\bfseries,
+   commentstyle = \color{comment}
+}
+
+% Define new command
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+
+\newcommand{\crt}{\emph{Nexys 4 DDR\ }}
+%\def\thesubsection{\alph{section}}
+
+\begin{document}
+
+\begin{titlepage}
+
+\center % Center everything on the page
+ 
+%----------------------------------------------------------------------------------------
+%	HEADING SECTIONS
+%----------------------------------------------------------------------------------------
+
+\textsc{\LARGE Universit\'e Pierre et Marie Curie}\\[1.5cm] % Name of your university/college
+\textsc{\Large PSESI}\\[0.5cm] % Major heading such as course name
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\HRule \\[0.4cm]
+{ \huge \bfseries Projet Centrale DCC}\\[0.4cm] % Title of your document
+{ \huge \bfseries Document De recherche bibliothécaire}\\[0.4cm] % Title of your document
+\HRule \\[1.5cm]
+ 
+%----------------------------------------------------------------------------------------
+%	AUTHOR SECTION
+%----------------------------------------------------------------------------------------
+
+\begin{minipage}{0.4\textwidth}
+\begin{flushleft} \large
+\emph{\'Etudiant:}\\
+Maxime \textsc{AYRAULT} 3203694 % Your name
+\end{flushleft}
+\end{minipage}
+~
+\begin{minipage}{0.4\textwidth}
+\begin{flushright} \large
+\emph{Encadrant:} \\
+Julien \textsc{DENOULET} % Supervisor's Name
+\end{flushright}
+\end{minipage}\\[2cm]
+
+%----------------------------------------------------------------------------------------
+%	DATE SECTION
+%----------------------------------------------------------------------------------------
+
+{\large \today}\\[2cm] % Date, change the \today to a set date if you want to be precise
+
+%----------------------------------------------------------------------------------------
+%	LOGO SECTION
+%----------------------------------------------------------------------------------------
+
+%%\begin{figure}
+%%  \subfigure[]{\includegraphics[scale=0.2\textwidth]{logo.png}} 
+%%\end{figure} 
+\includegraphics[width=0.2\textwidth]{logo.png}
+
+%----------------------------------------------------------------------------------------
+
+\vfill % Fill the rest of the page with whitespace
+
+\end{titlepage}
+
+
+
+%\begin{abstract}
+%Your abstract here.
+%\end{abstract}
+
+\section{Introduction}
+\label{sec:introduction}
+
+Le but de mon sujet était de développer sur FPGA un système
+d'aiguillage automatisé pour centrale DCC sur un train miniature.
+
+J'ai décidé de découper mon projet en deux étapes afin de bien dissocier les problèmes durant le projet.
+
+\medskip
+
+\begin{itemize}
+  \item Création de la centrale DCC.
+  \item Ajout de la gestion des aiguillages.
+\end{itemize}  
+
+\medskip
+
+J'ai rencontré quelques problèmes bloquants, notamment au niveau de la
+maquette  qui était incomplète et qui de ce fait ne remplissait pas
+les conditions nécessaires  à la réalisation de mon projet. J'ai donc
+décidé afin de pouvoir terminer ce  projet de passer en mode
+simulation. Ce mode peut être considéré comme un mode test avant
+l'application en mode  réel.
+
+\section{Mots clefs retenus}
+\label{sec:Mots_clefs}
+
+j'ai retenu deux mots clés qui me semblent importants pour la création de la centrale DCC.
+\textbf{FPGA} et \textbf{Protocole DCC}
+
+\medskip
+
+La \emph{carte FPGA} sert de plateforme de développement.
+
+Le \emph{protocole DCC} est le protocole qui permet de communiquer des
+informations aux trains.
+
+\bigskip
+
+Les mots clefs les plus importants concernant l'aiguillage sont
+\textbf{interlocking} et \textbf{Track Circuit}.
+
+\medskip
+
+\emph{L'interlocking} est la façon d'empêcher plusieurs trains de se retrouver l'un en face de l'autre.
+
+Un \emph{Track Circuit} est la plus petite portion de voie entre deux \emph{capteurs}.
+
+\section{Descriptif Recherche}
+\label{sec:descriptif}
+
+Pour obtenir les différents documents dont j'ai eu besoin lors de mon
+projet je suis passé par plusieurs sources. La principale étant
+\emph{M.Denoulet} qui m'a donné les premiers documents \cite{FPGA1} \cite{DCC} \cite{Jouef}   dont j'avais besoin
+pour comprendre le fonctionnement d'une \emph{centrale DCC}.
+
+\smallskip
+
+J'ai utilisé \emph{Google} en tant que moteur de recherche afin de
+trouver divers documents \cite{Xilink} \cite{IXL} \cite{OCAML}
+\cite{VHDL} \cite{siteferro} qui m'ont aider lors de mon projet.
+
+\smallskip
+
+les documents complémentaires que j'ai dû écrire lors de mon projet pour notamment définir les règles à mettre en place m'ont permis de me poser les bonnes questions lors de ce projet \cite{rapport}.
+
+
+\section{analyse de 3 sources}
+\label{sec:analyse}
+
+\emph{Source 1} :
+
+\smallskip
+
+Pour développer mon application Ocaml, je me suis appuyé sur le
+document de référence du \textbf{Ocaml} \cite{OCAML}. Ce document se trouve sur
+le site de l'\textbf{INRIA}. J'ai choisi ce site car le niveau de
+fiabilité concernant Ocaml est élevé. j'ai trouvé dans ce document tous les éléments nécessaires au développement de mon application.
+
+\bigskip
+
+\emph{Source 2} :
+
+\smallskip
+
+\textbf{Datasheet Xilink} \cite{Xilink}. J'ai trouvé la datasheet de la
+carte FPGA , la $NEXYS
+4DDR$, que j'ai utilisé tout au long de mon projet,sur le site officiel du fabricant de la carte \textbf{XILINK}. Ce
+document m'a permis de mieux comprendre le fonctionnement de la carte.
+J'ai essayé d'exploiter le mieux possible les informations fournies.
+
+\bigskip
+
+\emph{Source 3} :
+
+\smallskip
+
+Pour déterminer la meilleure façon d'implementer
+\textbf{l'interlocking} dans le cadre de mon projet, je me suis documenté en allant sur
+le site $www.railwaysignalling.eu$ \cite{IXL} qui regroupe toutes les
+informations partagées sur le fonctionnement des trains en
+Europe. Cela m'a permis d'obtenir des informations historiques mais aussi des informations et explications sur certaines notions nécessaires à la réalisation de mon projet.
+
+
+\newpage
+
+\bibliographystyle{plain}
+\bibliography{biblio}
+
+\end{document}

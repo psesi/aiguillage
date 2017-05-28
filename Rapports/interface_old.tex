@@ -1,0 +1,781 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% University Assignment Title Page 
+% LaTeX Template
+% Version 1.0 (27/12/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% WikiBooks (http://en.wikibooks.org/wiki/LaTeX/Title_Creation)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+% 
+% Instructions for using this template:
+% This title page is capable of being compiled as is. This is not useful for 
+% including it in another document. To do this, you have two options: 
+%
+% 1) Copy/paste everything between \begin{document} and \end{document} 
+% starting at \begin{titlepage} and paste this into another LaTeX file where you 
+% want your title page.
+% OR
+% 2) Remove everything outside the \begin{titlepage} and \end{titlepage} and 
+% move this file to the same directory as the LaTeX file you wish to add it to. 
+% Then add \input{./title_page_1.tex} to your LaTeX file where you want your
+% title page.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\title{Title page with logo}
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[12pt]{article}
+
+\usepackage[francais]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{color}
+
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{enumerate}
+\usepackage{url}
+\usepackage{listings}
+
+\usepackage{xcolor}
+\colorlet{keyword}{blue!100!black!80}
+\colorlet{comment}{green!90!black!90}
+\lstdefinestyle{vhdl}{
+   language     = VHDL,
+   basicstyle   = \ttfamily,
+   keywordstyle = \color{keyword}\bfseries,
+   commentstyle = \color{comment}
+}
+
+\lstdefinestyle{equ}{
+   basicstyle   = \ttfamily,
+   keywordstyle = \color{keyword}\bfseries,
+   commentstyle = \color{comment}
+}
+
+% Define new command
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+
+\newcommand{\crt}{\emph{Nexys 4 DDR\ }}
+%\def\thesubsection{\alph{section}}
+
+\begin{document}
+
+\begin{titlepage}
+
+\center % Center everything on the page
+ 
+%----------------------------------------------------------------------------------------
+%	HEADING SECTIONS
+%----------------------------------------------------------------------------------------
+
+\textsc{\LARGE Universit\'e Pierre et Marie Curie}\\[1.5cm] % Name of your university/college
+\textsc{\Large PSESI}\\[0.5cm] % Major heading such as course name
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\HRule \\[0.4cm]
+{ \huge \bfseries Projet Centrale DCC}\\[0.4cm] % Title of your document
+{ \huge \bfseries Document Définition Interface et Logique Enclenchement}\\[0.4cm] % Title of your document
+\HRule \\[1.5cm]
+ 
+%----------------------------------------------------------------------------------------
+%	AUTHOR SECTION
+%----------------------------------------------------------------------------------------
+
+\begin{minipage}{0.4\textwidth}
+\begin{flushleft} \large
+\emph{\'Etudiant:}\\
+Maxime \textsc{AYRAULT} 3203694 % Your name
+\end{flushleft}
+\end{minipage}
+~
+\begin{minipage}{0.4\textwidth}
+\begin{flushright} \large
+\emph{Encadrant:} \\
+Julien \textsc{DENOULET} % Supervisor's Name
+\end{flushright}
+\end{minipage}\\[2cm]
+
+%----------------------------------------------------------------------------------------
+%	DATE SECTION
+%----------------------------------------------------------------------------------------
+
+{\large \today}\\[2cm] % Date, change the \today to a set date if you want to be precise
+
+%----------------------------------------------------------------------------------------
+%	LOGO SECTION
+%----------------------------------------------------------------------------------------
+
+%%\begin{figure}
+%%  \subfigure[]{\includegraphics[scale=0.2\textwidth]{logo.png}} 
+%%\end{figure} 
+\includegraphics[width=0.2\textwidth]{logo.png}
+
+%----------------------------------------------------------------------------------------
+
+\vfill % Fill the rest of the page with whitespace
+
+\end{titlepage}
+
+
+
+%\begin{abstract}
+%Your abstract here.
+%\end{abstract}
+
+\section{Introduction}
+\label{sec:introduction}
+Présentation des 3 interfaces~:
+\begin{itemize}
+\item Interface Homme Machine
+\item Interface Centrale DCC et le circuit ferroviaire
+\item Interface interne Centrale DCC - Moteur IXL
+\end{itemize}
+
+et présentation des règles de la logique d'enclenchement.
+
+
+\section{Interface Homme Machine}
+\label{sec:int-dcc}
+Sur la carte
+\begin{itemize}
+\item Bouton gauche -> changement du paramètre
+\item Bouton droit  -> changement de la valeur du paramètre
+\end{itemize}
+
+\hrulefill
+
+Dans le design
+\begin{enumerate}
+\item en sortie :
+  \begin{itemize}  
+  \item les 7 selecteurs de segment Ca -> Cg
+  \item les 8 selecteurs de digit   An (7 downto 0)
+  \item octet adresse \textbf{\emph{(addr or aigui)}}  dans ADD
+  \item octet speed \textbf{\emph{(speed)}}  dans SPEED
+  \item octet fonction \textbf{\emph{(feat)}}  dans FCTN    
+  \end{itemize}  
+\item en entrée :
+  \begin{itemize}  
+  \item une horloge à 100 MHz
+  \item un reset synchrone actif haut 
+  \item la valeur du bouton gauche BTNL
+  \item la valeur du bouton droit BTNR    
+  \end{itemize}  
+\end{enumerate}
+
+\subsection{\underline{Interface commande train}}
+\label{sec:ihm-train}
+
+\bigskip
+
+8 vitesses
+\begin {enumerate}
+\item vitesse 0 -> \emph{``01100000''}
+\item vitesse 1 -> \emph{``01100010''}
+\item vitesse 2 -> \emph{``01100100''}
+\item vitesse 3 -> \emph{``01101000''}
+\item vitesse 4 -> \emph{``01101010''}
+\item vitesse 5 -> \emph{``01110000''}
+\item vitesse 6 -> \emph{``01110100''}
+\item vitesse 7 -> \emph{``01111111''}
+\end {enumerate}  
+
+\bigskip
+
+6 adresses de train
+\begin {enumerate}
+\item adresse 0 -> \emph{``00000000''}  
+\item adresse 1 -> \emph{``00000001''}
+\item adresse 2 -> \emph{``00000010''}
+\item adresse 3 -> \emph{``00000011''}
+\item adresse 4 -> \emph{``00000100''}
+\item adresse 5 -> \emph{``00000101''}
+\item adresse 6 -> \emph{``00000110''}
+\end {enumerate}  
+
+\bigskip
+
+8 adresses de d'aiguillage
+\begin {enumerate}
+\item elles ne sont pas encore définies. mais de 10 à 18 pour faire simple.
+\end {enumerate}  
+
+\bigskip
+
+5 fonctions
+\begin {enumerate}
+\item phares on     -> \emph{``10010000''}
+\item bruit moteur  -> \emph{``10000001''}
+\item klaxon 1 long -> \emph{``10000100''}
+\item klaxon 1 bref -> \emph{``10100100''}
+\item bruit du vent -> \emph{``10100001''}
+\end {enumerate}  
+
+\bigskip
+
+\subsection{\underline{Interface itinéraire}}
+\label{sec:ihm_iti}
+
+Elle n'a pas été implémentée, mais la base sur laquelle j'étais partie
+\'etait d'affecter un switch de la carte par itinéraire.
+Un itineraire correspondant à une suite de changement de positions
+d'aiguillages et passage sur certains capteurs.
+
+\newpage
+
+\section{Interface Centrale DCC - Train, aiguillage et capteurs}
+\label{sec:int_dcc}
+
+\subsection{\underline{Interface Train}}
+\label{sec:int_train}
+
+\bigskip
+Trames envoyées 4 par 4 séparées chacune par 400 us avec comme valeur 0.
+\begin{center}
+\begin{tabular}{|l|l|l|}
+  \hline
+  1er trame & IDLE \\
+  \hline
+  2eme trame & Vitesse \\
+  \hline
+  3eme trame & Action \\
+  \hline
+  4eme trame & IDLE \\
+  \hline
+\end{tabular}
+\end{center}
+
+\medskip
+Les valeurs des trames à envoyer sont les mêmes jusqu'à un appui sur
+le bouton central qui change la valeur courante des différentes
+commandes.
+
+
+\medskip
+\begin{center}
+\begin{tabular}{lll}
+adresse & => & ``11111111'' \\
+donnée  & => & ``00000000'' \\
+CRC     & => & ``11111111'' \\
+\end{tabular}
+\end{center}
+
+\medskip
+Paramètres à envoyer stockés dans \emph{Master}.
+
+Les différentes commandes viennent de l'IHM \emph{(voir
+  \cite{rapport})}  et remplacent la valeur IDLE \emph{(si il y a eu
+  un reset)}et sont envoyées en continue tant qu'il n'y a pas de nouvelles pression sur bouton Central.
+
+
+\subsection{\underline{Interface Capteurs}}
+\label{sec:int_cap}
+
+A garder??
+
+bla bla bla...
+
+
+\newpage
+\section{\underline{Interface Centrale DCC - Moteur IXL}}
+\label{sec:int_ixl}   
+
+La logique d'enclenchement est normalement basée sur les notions de signaux, de
+circuit de voie et d'itinéraire ferroviaire. Dans le cadre du projet,
+la logique d'enclenchement sera simplifiée et sera basée uniquement sur les
+notions de circuits de voie et d'aiguillages. 
+
+\medskip
+Un \emph{Ciruit de Voie} (CdV) représente la plus petite partie de
+voie sur lequel il est possible de détecter la présence d'un
+train. Pour un train réel, la détection de la présence d'un train
+s'effectue par les essieux du train. En effet, les essieux du train
+sont conducteur (métal), ils peuvent servir comme un
+\emph{interupteur} entre les 2 rails de la voie. Si une partie du
+train est présent alors les 2 rails sont au même potentiel (le circuit
+est dit fermé), sinon les rails sont a des potentiels différents (le
+circuit est dit ouvert).
+
+\medskip
+Pour le projet, un Circuit de voie sera délimité par 2 capteurs de
+passage(sauf en zone d'aiguille où le circuit de voie sera délimité
+par les capteurs de chaque branche). L'état d'occupation du CdV sera
+fourni pas le sens de parcours identifié par le capteur pour chaque
+train.
+
+\medskip
+Un \emph{aiguillage} est un équipement de voie permettant de faire
+circuler un train d'une voie à une autre. Une aiguille est constituée
+d'une pointe et de deux branches. Selon la commande reçue par
+l'aiguillage, la position de son aiguille change pour permettre au train
+de circuler :
+\begin{itemize}
+\item sur la branche commandée en venant de la pointe de l'aiguillage
+\item vers la pointe en venant de la branche commandée. 
+\end{itemize}
+
+\medskip
+Dans tous les autre cas (aiguille entrebaillée ou en mauvaise position), 
+il y a un risque de déraillement du train. Il existe également un autre 
+risque autour des aiguillages, c'est le risque de collision entre deux
+trains provenant de branches différentes en même temps. Le système 
+d'enclenchement doit permettre d'éviter ces deux risques.
+Dans un système d'enclenchement, une aiguille est représenté par une 
+machine à états. Les états possibles sont:
+
+\begin{itemize}
+\item \emph{droite}. L'aiguille est positionnée du côté droit en regardant
+l'aiguillage depuis la pointe
+\item \emph{gauche}. L'aiguille est positionnée du côté gauche en regardant
+l'aiguillage depuis la pointe
+\item \emph{decontrôlée}. L'aiguille n'est positionnée ni du côté droit, 
+ni du coté gauche (aiguille en mouvement ou Hors Service).
+\end{itemize}
+
+\medskip
+L'interface entre la Centrale DCC et le Moteur IXL est bi-directionnelle. 
+
+\begin{itemize}
+\item Dans le sens Centrale vers IXL, les informations envoyées sont~:
+  \begin{itemize}
+  \item les demandes de commande d'aiguillage provenant de l'opérateur
+  \item l'état des aiguilles (gauche/droite)
+  \item l'information des capteurs de passage
+  \end{itemize}
+
+\item Dans le sens IXL vers Centrale, les informations envoyées sont~:
+  \begin{itemize}
+  \item les autorisations de commande des aiguilles
+  \item l'état des circuits de voie pour faciliter la mise au point 
+  du système d'enclenchement
+  \end{itemize}
+\end{itemize}
+
+
+\subsection{\underline{Demande de commande des aiguillages}}
+\label{sec:ixl_dem_aig}
+
+L'opérateur peut demander de commander un aiguillage dans une certaine
+position pour permettre au train de changer de voie.
+
+Une demande de commande d'un aiguillage sera représenté par
+1 bit avec la convention suivante~:
+\begin{itemize}
+\item 0 = demande de commande de aiguille à droite
+\item 1 = demande de commande de aiguille à gauche
+\end{itemize}
+ 
+Il y a 8 aiguilles sur le circuit. L'indice du tableau correspond au
+numéro de l'aiguille.
+
+\medskip
+La déclaration VHDL
+\begin{lstlisting}[style=vhdl]
+  
+  signal Sw_Cmd_Req :   STD_LOGIC_VECTOR (7 downto 0);
+  
+\end{lstlisting}
+
+
+\subsection{\underline{\'Etat des aiguillages}}
+\label{sec:ixl_aig}
+
+Il n'y a pas de capteur fournissant la position d'une aiguille sur la
+maquette.  Par conséquent, l'état d'un aiguillage correspondra à l'état
+de la dernière commande envoyée à l'aiguillage depuis la Centrale DCC.
+L'état \emph{décontrôlé} ne sera pas utilisé.
+ 
+L'état d'un aiguillage sera représenté par 1 bit avec la convention
+suivante~:
+\begin{itemize}
+\item 0 = aiguille positionnée à droite
+\item 1 = aiguille positionnée à gauche
+\end{itemize}
+ 
+Il y a 8 aiguilles sur le circuit. L'indice du tableau correspond au
+numéro de l'aiguille.
+
+\medskip
+La déclaration VHDL
+\begin{lstlisting}[style=vhdl]
+
+  signal Sw_State   :   STD_LOGIC_VECTOR (7 downto 0);
+  
+\end{lstlisting}
+
+
+\subsection{\underline{\'Information capteur de passage}}
+\label{sec:ixl_cdv}
+
+Des capteurs de passage sont positionnés au long de la voie pour 
+permettre de délimiter les Circuits de Voie. Un capteur de passage
+fournit l'adresse du train venant de passer sur le capteur ainsi que
+sa direction. La direction est une valeur arbitraire associée à 
+chaque capteur pour connaitre le sens de parcours du train sur le capteur.
+
+
+Il y a 6 trains au maximum. Les capteurs sont codés comme suit~:
+\begin{itemize}
+  \item dir = 0b01 : train dans le sens Up
+  \item dir = 0b10 : train dans le sens Down
+  \item dir = 0b11 : aucun train
+  \item addr = 0x01 à 0x06 : numéro du train 1 à 6 passant sur le capteur
+\end{itemize}  
+
+Il y a 20 capteurs de passage sur la maquette de train. L'indice du
+tableau correspond au numéro du capteur de passage.
+
+\medskip
+La déclaration VHDL
+\begin{lstlisting}[style=vhdl]
+
+  type sensor is
+    record
+      addr : STD_LOGIC_VECTOR (7 downto 0) ;
+      dir  : STD_LOGIC_VECTOR (1 downto 0) ;
+    end record ;
+
+  -- Sensors state type
+  type SE_state is array (31 downto 0) of sensor;
+
+\end{lstlisting}
+
+
+\subsection{\underline{Autorisation de commande des aiguillages}}
+\label{sec:ixl_dem_aig}
+
+Une fois que le système d'enclenchement a vérifé que toutes les
+conditions requises pour bouger une aiguille sont remplies, il 
+retourne à la Centrale DCC son autorisation de commande des aiguillages.
+
+L'autorisation de commande d'un aiguillage sera représenté par
+1 bit avec la convention suivante~:
+\begin{itemize}
+\item 0 = autorisation de commande de aiguille à droite
+\item 1 = autorisation de commande de aiguille à gauche
+\end{itemize}
+ 
+Il y a 8 aiguilles sur le circuit. L'indice du tableau correspond au
+numéro de l'aiguille.
+
+\medskip
+La déclaration VHDL
+\begin{lstlisting}[style=vhdl]
+
+  Sw_Cmd_Aut : out STD_LOGIC_VECTOR (7 downto 0);
+
+\end{lstlisting}
+
+
+  
+\subsection{\underline{\'Etat des Circuits de Voie}}
+\label{sec:st_sig}
+
+Chaque circuit de voie possède 2 états; \emph{Libre} ou
+\emph{Occupé}. De façon à pouvoir effectuer la gestion des trains, il
+est nécessaire d'identifier quel train occupe le circuit de voie.  Il
+y a 6 trains au maximum. Les états sont codés come suit~:
+\begin{itemize}
+  \item libre : 0x07
+  \item occupé : numéro du train 0x01 à 0x06
+\end{itemize}  
+
+Il y a 16 circuits de voie sur la maquette de train. L'indice du
+tableau correspond au numéro du Circuit de Voie.
+
+\medskip
+La déclaration VHDL
+\begin{lstlisting}[style=vhdl]
+
+  --debug output
+  TC_out     : out STD_LOGIC_VECTOR (7 downto 0)
+
+\end{lstlisting}
+
+
+
+
+\newpage
+\section{\underline{Logique Enclenchement}}
+\label{sec:log_enc}
+
+Cette section présente la logique d'enclenchement, sa justification et
+les conversions de nommage utilisées dans les équations.
+
+\subsection{\underline{Circuit de Voie}}
+\label{sec:CdV}
+
+Un Circuit de Voie est la section de voie se trouvant entre 2 capteurs
+de présence consécutifs. Un capteur de présence permet de
+connaître, le numéro du train et son sens de déplacement. Le sens de
+déplacement va permettre de savoir quel Circuit de voie est occupé par le
+train. Deux directions sont arbitrairement déclarées pour chaque
+capteur; Up et Down.
+
+Convention de nommage des éléments :
+\begin{itemize}
+\item $SE\_Up_{nn}$, 1 lorsqu'un train vient de passer le capteur numéro
+  nn dans le sens Up
+\item $SE\_Do_{nn}$, 1 lorsqu'un train vient de passer le capteur numéro
+  nn dans le sens Down
+\item $TC_{nn}$, 1 lorsque le Circuit de Voie est libre (aucun train
+  présent sur le CdV), 0 lorsque le circuit de voie est occupée. Cette
+  logique va dans le sens de la sécurité, en cas de perte de courant
+  ou de dysfonctionnement, il n'est pas possible de savoir si le
+  Circuit De Voie est occupé ou libre, donc on choisit la valeur la
+  plus sécuritaire, occupé même si aucun train n'est présent.
+\end{itemize}
+
+\'A l'initialisation, tous les Circuits de Voie sont libres.
+
+\medskip
+Le Circuit de voie $TC_{nn}$ est occupé si une des condition suivantes
+est vérifiée~:
+\begin{itemize}
+\item le capteur $SE\_Up_{nn}$ passe à 1, un train vient de rentrer dans
+  le sens Up
+\item le capteur $SE\_Do_{mm}$ passe à 1, un train vient de rentrer dans
+  le sens Down
+\item le Circuit de Voie est occupé et le train n'est pas sorti dans
+  le sens Up ou Down
+\end{itemize}
+
+Il faut inverser cette logique car lorsque le Circuit de voie est
+occupé, on cherche à avoir une valeur 0.
+
+\medskip
+L'équation générale d'occupation d'un Circuit de Voie est~:
+$$\boxed{
+  TC_{nn} \Leftarrow \neg SE\_Up_{nn} \land \neg SE\_Do_{mm} \land
+  (TC_{nn} \lor SE\_Do_{nn} \lor SE\_Up_{mm});
+}$$
+
+
+\subsection{\underline{Signaux}}
+\label{sec:esp}
+
+Il existe deux types de signaux; les signaux d'espacement qui
+garantissent que 2 trains ne vont pas se percuter et les signaux de
+manoeuvre qui garantissent qu'un train ne va pas parcourir une
+aiguille qui n'est pas contrôlée.
+
+Convention de nommage des éléments :
+\begin{itemize}
+\item $SI_{nn}$, 1 lorsque le signal est Vert, 0 pour afficher un signal
+  Rouge
+\end{itemize}
+
+\'A l'initialisation, tous les signaux sont au Vert.
+
+Un Signal d'espacement passe~:
+\begin{itemize}
+\item au Rouge, lorsque le signal d'espacement ou le signal de
+  manoeuvre est au Rouge
+\item au Vert, lorsque le signal d'espacement et le signal de
+  manoeuvre sont au Vert
+\end{itemize}
+
+
+\medskip
+L'équation générale d'un signal est~:
+$$\boxed{
+  SI_{nn} \Leftarrow SI\_SP_{nn} \land SI\_IX_{nn};
+}$$
+
+
+\subsection{\underline{Signal d'espacement des trains}}
+\label{sec:esp}
+
+Il est dangereux d'avoir 2 trains dans le même Circuit de Voie car
+rien ne permet de garantir que les 2 trains ne vont pas se
+percuter. Il n'est pas certain qu'un conducteur puisse arrêter le
+train devant un signal car la distance de freinage entre le signal et
+le Circuit de Voie à protéger n'est pas toujours suffisante. C'est
+pourquoi, il est nécessaire de toujours avoir un Circuit de Voie libre
+entre 2 trains. Ce Circuit de Voie est nommé, \emph{CdV tampon}.  Dans
+le cas de 2 trains qui se suivent, il est nécessaire que la longueur
+du Circuit de Voie soit plus grande que la distance d'arrêt du train
+suiveur.  Dans le cas de 2 trains en sens inverse, il est nécessaire
+de s'assurer que la longueur du Circuit de Voie tampon est égale à 2
+fois la longueur d'arrêt d'un train.
+
+L'entrée dans un Circuit de Voie est protégée par un signal dit
+\emph{d'espacement}.
+
+Convention de nommage des éléments~:
+\begin{itemize}
+\item $SI\_SP_{nn}$, 1 lorsque le signal est Vert, 0 pour afficher un
+  signal Rouge
+\end{itemize}
+
+\'A l'initialisation, tous les signaux sont au Vert.
+
+Un Signal d'espacement passe~:
+\begin{itemize}
+\item au Rouge, lorsque le $TC_{nn}$ est occupé ou le $TC_{mm}$ est occupé
+\item au Vert, lorsque les $TC_{nn}$ et $TC_{mm}$ sont libres.
+\end{itemize}
+
+\medskip
+L'équation générale d'un signal d'espacement est~:
+$$\boxed{
+  SI\_SP_{nn} \Leftarrow TC_{nn} \land TC_{mm};
+}$$
+
+
+\subsection{\underline{Signal de manoeuvre}}
+\label{sec:esp}
+
+Un signal de manoeuvre garantit qu'un train peut traverser une zone
+d'aiguillage sans danger. C'est à dire que les aiguilles de la zone
+sont toutes enclenchées.
+
+
+
+
+\subsection{\underline{Zone d'aiguille}}
+\label{sec:aig}
+
+Une aiguille peut être autorisée à bouger à droite (resp. gauche) 
+si elle a reçu une commande à droite (resp. à gauche) et que le 
+Circuit de Voie de l'aiguille et ses Ciruits de voie adjacents
+sont libres. 
+
+\medskip
+L'équation générale d'autorisation de commande d'une aiguille est~:
+$$\boxed{
+  SW\_AUT\_RI_{nn} \Leftarrow SW\_CMD\_RI_{nn} \land TC_{nn} \land
+  TC_{mm} ;
+}$$
+$$\boxed{
+  SW\_AUT\_LE_{nn} \Leftarrow SW\_CMD\_LE_{nn} \land TC_{nn} \land TC_{mm} ;
+}$$
+
+
+\subsection{\underline{Itinéraire}}
+\label{sec:iti}
+
+Cette partie n'a pas été implémentée mais voici comment elle aurait dû
+fonctionner.
+
+Chaque itinéraire est un tableau de n instructions.
+Le tableau contient l’état des aiguilles et la valeur des Tracks
+circuits  occupés, quand les deux  valeurs sont identiques, il faut
+passer  à la case suivante du  tableau.
+
+Il y a 3 états pour chauques aiguillages,
+\begin{itemize}
+  \item '0' Pour forcer un aiguillage à être fermé.
+  \item '1' Pour forcer un aiguillage à être ouvert.
+  \item 'DC' La valeur ne nous interesse pas.    
+\end{itemize}  
+
+Idem pour les Tracks Circuits
+
+Le but est de tenter d’obtenir les deux valeurs en même temps pour
+passer à la case suivante du tableau, une fois l’itinéraire complété,
+on  allume la led correspondante au switch pour signaler la fin de
+l’itinéraire. 
+
+
+
+\section{Logique d'enclenchement}
+\label{sec:logic}
+\subsection{\underline{Occupation de CdV}}
+\label{sec:cdv_occ}
+
+Voici le tableau qui permet de connaitre l'état d'un Track Circuit
+selon l'état des capteurs.
+
+\begin{center}
+\begin{tabular}{|l||llll|}
+  \hline
+  TC\_01 & SE\_UP\_01 & SE\_UP\_19 & SE\_DO\_02 & SE\_DO\_08 \\
+  \hline
+  TC\_02 & SE\_UP\_02 & SE\_DO\_03 & & \\
+  \hline
+  TC\_03 & SE\_UP\_03 & SE\_DO\_04 & & \\
+  \hline
+  TC\_04 & SE\_UP\_04 & SE\_UP\_10 & SE\_DO\_05 & SE\_DO\_20 \\
+  \hline
+  TC\_05 & SE\_UP\_05 & SE\_DO\_06 & & \\
+  \hline
+  TC\_06 & SE\_UP\_06 & SE\_DO\_01 & & \\
+  \hline
+  TC\_07 & SE\_UP\_08 & SE\_DO\_09 & & \\
+  \hline
+  TC\_08 & SE\_UP\_09 & SE\_DO\_10 & & \\
+  \hline
+  TC\_09 & SE\_UP\_11 & SE\_DO\_12 & & \\
+  \hline
+  TC\_10 & SE\_UP\_12 & SE\_DO\_07 & & \\
+  \hline
+  TC\_11 & SE\_UP\_07 & SE\_UP\_13 & SE\_DO\_14 & SE\_DO\_19 \\
+  \hline
+  TC\_12 & SE\_UP\_14 & SE\_DO\_15 & & \\
+  \hline
+  TC\_13 & SE\_UP\_15 & SE\_DO\_16 & & \\
+  \hline
+  TC\_14 & SE\_UP\_16 & SE\_UP\_20 & SE\_DO\_11 & SE\_DO\_17 \\
+  \hline
+  TC\_15 & SE\_UP\_17 & SE\_DO\_18 & & \\
+  \hline
+  TC\_16 & SE\_UP\_18 & SE\_DO\_13 & & \\
+  \hline
+\end{tabular}
+\end{center}
+
+Un Track Circuit est considéré comme occupé lorsque l'un des capteurs
+renvoi une information qui permet de faire changer l'état du Track
+Circuit dans le tableau ci dessus.
+
+
+\subsection{\underline{Mouvement d'aiguille}}
+\label{sec:mvt_aig}
+
+Voici le tableau qui regoupe les différentes équations qui vont
+permettre de definir l'état de chacune des 8 aiguilles.
+
+
+\begin{center}
+\begin{tabular}{|l||lllll|}
+  \hline
+  SW1 & TC\_01 & TC\_02 & TC\_06 & TC\_07 & TC\_11 \\
+  \hline
+  SW2 & TC\_01 & TC\_02 & TC\_06 & TC\_07 & TC\_11 \\
+  \hline
+  SW3 & TC\_11 & TC\_01 & TC\_16 & TC\_10 & TC\_12 \\
+  \hline
+  SW4 & TC\_11 & TC\_01 & TC\_16 & TC\_10 & TC\_12 \\
+  \hline
+  SW5 & TC\_04 & TC\_03 & TC\_05 & TC\_08 & TC\_09 \\
+  \hline
+  SW6 & TC\_04 & TC\_03 & TC\_05 & TC\_08 & TC\_09 \\
+  \hline
+  SW7 & TC\_14 & TC\_04 & TC\_09 & TC\_15 & TC\_13 \\
+  \hline
+  SW8 & TC\_14 & TC\_04 & TC\_09 & TC\_15 & TC\_13 \\
+  \hline
+\end{tabular}
+\end{center}
+
+On obtient ainsi en sortie de notre module ce qu'il faut envoyer sur
+chaque aiguillages pour eviter d'avoir deux trains se rentrant dedans.
+
+\newpage
+
+\bibliographystyle{plain}
+\bibliography{biblio_inter}
+
+\end{document}

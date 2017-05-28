@@ -1,0 +1,225 @@
+
+Cycle 1 : --reset the circuit
+Events
+
+  SE_ID_1;  
+  SE_ID_2;  
+  SE_ID_3;  
+  SE_ID_4;  
+  SE_ID_5;  
+  SE_ID_6;  
+  SE_ID_7;  
+  SE_ID_8;  
+  SE_ID_9;  
+  SE_ID_10;  
+  SE_ID_11;  
+  SE_ID_12;  
+  SE_ID_13;  
+  SE_ID_14;  
+  SE_ID_15;  
+  SE_ID_16;  
+  SE_ID_17;  
+  SE_ID_18;  
+  SE_ID_19;  
+  SE_ID_20;  
+
+  SW_CMD_NO_1;
+  SW_CMD_NO_2;
+  SW_CMD_NO_3;
+  SW_CMD_NO_4;
+  SW_CMD_NO_5;
+  SW_CMD_NO_6;
+  SW_CMD_NO_7;
+  SW_CMD_NO_8;
+
+  SW_ST_LE_1;
+  SW_ST_LE_2;
+  SW_ST_LE_3;
+  SW_ST_LE_4;
+  SW_ST_LE_5;
+  SW_ST_LE_6;
+  SW_ST_LE_7;
+  SW_ST_LE_8;
+
+
+Outputs
+
+  TC_01 = Free;  
+  TC_02 = Free;  
+  TC_03 = Free;  
+  TC_04 = Free;  
+  TC_05 = Free;  
+  TC_06 = Free;  
+  TC_07 = Free;  
+  TC_08 = Free;  
+  TC_09 = Free;  
+  TC_10 = Free;  
+  TC_11 = Free;  
+  TC_12 = Free;  
+  TC_13 = Free;  
+  TC_14 = Free;  
+  TC_15 = Free;
+  TC_16 = Free;	
+
+
+  SW_AUT_LE_1 = NoAut;
+  SW_AUT_LE_2 = NoAut;
+  SW_AUT_LE_3 = NoAut;
+  SW_AUT_LE_4 = NoAut;
+  SW_AUT_LE_5 = NoAut;
+  SW_AUT_LE_6 = NoAut;
+  SW_AUT_LE_7 = NoAut;
+  SW_AUT_LE_8 = NoAut;  
+
+  SW_AUT_RI_1 = NoAut;
+  SW_AUT_RI_2 = NoAut;
+  SW_AUT_RI_3 = NoAut;
+  SW_AUT_RI_4 = NoAut;
+  SW_AUT_RI_5 = NoAut;
+  SW_AUT_RI_6 = NoAut;
+  SW_AUT_RI_7 = NoAut;
+  SW_AUT_RI_8 = NoAut;  
+  
+
+Cycle 2 : -- 2 trains block one switch with one and move it after to let the second train changing track
+Events
+  SE_UP_1;   -- Train 1 enter into TC1
+  SE_UP_10;  -- Train 2 enter into TC4
+Outputs
+  TC_01 = Occ; --
+  TC_04 = Occ; --
+
+
+Cycle 3 :
+Events
+  SE_ID_1; 
+  SE_ID_10;
+  SE_UP_2;   -- Train 1 enter into TC2
+  SE_UP_20;  -- Train 2 enter into TC14
+Outputs
+  TC_02 = Occ; --
+  TC_14 = Occ; --
+  TC_01 = Free; --
+  TC_04 = Free; --
+
+
+Cycle 4 : -- train 2 stay in TC14
+Events
+  SE_ID_2; 
+  SE_ID_20;
+  SE_UP_3;   -- Train 1 enter into TC3
+  SW_CMD_RI_5;      
+Outputs
+  TC_03 = Occ; --
+  TC_14 = Occ; --
+  TC_02 = Free; --
+  SW_AUT_RI_5 = NoAut; --
+  
+Cycle 5 : -- ask to open switch 5 ?
+Events
+  SE_ID_3; 
+  SE_UP_4;   -- Train 1 enter into TC3
+  SW_CMD_NO_5;        	
+  SW_CMD_LE_5;  
+Outputs
+  TC_04 = Occ; --
+  TC_14 = Occ; --
+  TC_03 = Free; --
+  SW_AUT_RI_5 = NoAut;
+  
+Cycle 6 : -- Train 1 force to continue into the first track
+Events
+  SE_ID_4; 
+  SE_UP_5;
+  SW_CMD_NO_5;  
+Outputs
+  TC_05 = Occ; --
+  TC_14 = Occ; --
+  TC_04 = Free; --
+
+
+Cycle 7 : -- Move Train 2
+Events
+  SE_ID_5; 
+  SE_UP_6;   
+  SE_UP_11;  
+Outputs
+  TC_06 = Occ; --
+  TC_09 = Occ; --
+  TC_05 = Free; --
+  TC_14 = Free;	--
+  
+Cycle 8 : 
+Events
+  SE_ID_6; 
+  SE_ID_11; 
+  SE_UP_1;   
+  SE_UP_12;  
+Outputs
+  TC_01 = Occ; --
+  TC_10 = Occ; -- 
+  TC_06 = Free; -- TC06
+  TC_09 = Free; -- TC09
+
+Cycle 9 : 
+Events
+  SE_ID_1;
+  SE_ID_12;	
+  SE_UP_2;   
+  SW_CMD_RI_5;
+Outputs
+  TC_02 = Occ; --
+  TC_10 = Occ; --
+  TC_01 = Free; --
+  SW_AUT_RI_5 = Aut;
+  
+Cycle 10 :  -- ask the switch 5 to change
+Events
+  SE_ID_2;
+  SE_UP_3;   
+  SW_CMD_NO_5;
+  SW_CMD_LE_5;    
+Outputs
+  TC_03 = Occ; --
+  TC_10 = Occ; --
+  TC_02 = Free; --
+  SW_AUT_LE_5 = NoAut;
+  
+Cycle 11 : 
+Events
+  SE_ID_3;
+  SE_UP_4;     
+Outputs
+  TC_04 = Occ; --
+  TC_10 = Occ; --
+  TC_03 = Free; --
+
+
+Cycle 12 : 
+Events
+  SE_ID_4;
+  SE_UP_20;
+  SW_CMD_NO_5;
+Outputs
+  TC_14 = Occ; --
+  TC_10 = Occ; --
+  TC_04 = Free; --
+
+Cycle 13 : -- Train 2 is on track 2
+Events
+  SE_ID_20;
+  SE_UP_11;
+Outputs
+  TC_09 = Occ; --
+  TC_10 = Occ; --
+  TC_14 = Free; --
+
+Cycle 14 : -- end cycle
+Events
+
+Outputs
+
+Cycle 15 : -- end cycle
+Events
+
+Outputs

@@ -1,0 +1,24 @@
+GHDL=ghdl
+TRANSLATE=./translate.x
+
+
+all : IXL_tb
+
+# compil IXL
+
+IXL_generic.vhdl: logic.eq
+	${TRANSLATE} -i logic.eq -o IXL_generic.vhdl
+
+IXL_generic.o: IXL_generic.vhdl
+	${GHDL} -a -v IXL_generic.vhdl
+
+IXL_tb.o :  IXL_generic.o
+	${GHDL} -a -v Simul/IXL_tb.vhdl 
+
+IXL_tb :IXL_tb.o
+	${GHDL} -e -v IXL_tb
+	${GHDL} -r IXL_tb --vcd=IXL.vcd
+
+clean :
+	rm -f *.o *#  *vcd *~
+	rm -f work-obj93.cf IXL_generic.vhdl IXL_tb 

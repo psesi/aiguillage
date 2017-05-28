@@ -1,0 +1,72 @@
+
+Cycle 0:
+Events
+Outputs
+TC_07 = Free;
+
+Cycle 1: -- Enter TC07 from SE_08
+Events
+  SE_UP_08;  
+Outputs
+  TC_07 = Occ;  -- TC07 is occupied
+
+Cycle 2:  -- Train in TC07
+Events
+  SE_ID_08; 
+Outputs
+  TC_07 = Occ;   -- TC07 is occupied
+
+Cycle 3:  -- Exit TC07 from SE_09
+Events
+  SE_UP_09;
+Outputs
+  TC_07 = Free;   -- TC07 is free
+  TC_08 = Occ;    -- TC07 is occupied
+  
+Cycle 4:  -- train outside TC07 from SE_09
+Events
+  SE_ID_09;
+Outputs
+  TC_07 = Free;   -- TC07 is occupied
+  TC_08 = Occ;    -- TC08 is occupied
+
+Cycle 5:  -- train enter TC07 from SE_09
+Events
+  SE_DO_09;
+Outputs
+  TC_07 = Occ;   -- TC07 is occupied
+  TC_08 = Free;  -- TC08 is free
+
+Cycle 6:  -- train inside TC07
+Events
+  SE_ID_09;
+Outputs
+  TC_07 = Occ;   -- TC07 is occupied
+  TC_08 = Free;  -- TC07 is free
+
+Cycle 7: -- train exits TC07 from SE_08  
+Events
+  SE_DO_08;
+Outputs
+  TC_07 = Free;  -- TC07 is free
+  TC_01 = Occ;   -- TC01 is occupied
+
+Cycle 8:  -- Train outside TC07 
+Events
+  SE_ID_08;
+Outputs
+  TC_07 = Free;  -- TC07 is free
+  TC_01 = Occ;   -- TC01 is occupied
+
+Cycle 9:
+Events
+Outputs
+  TC_07 = Free;
+
+Cycle 10:
+Events
+Outputs
+  TC_07 = Free;
+
+  
+  
